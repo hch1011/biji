@@ -1,0 +1,239 @@
+
+重启Mysql  
+/etc/init.d/mysql start  
+/etc/init.d/mysql stop  
+/etc/init.d/mysql restart  
+ 
+
+//从mysql5.0开始使用CMake编译安装源码包，这不同于以往的configure、make && make install
+本人安装过程中发现还需要安装如下工具包cmake，bison，如果有安装出错，最好删除源码 重新解压安装
+
+
+从mysql5.0开始使用CMake编译安装源码包,安装mysql之前需要以下库
+1.安装make编译器（系统自带，跳过..）
+	下载地址： http://www.gnu.org/software/make/
+	tar zxvf make-3.82.tar.gz  
+	cd make-3.82  
+	./configure
+	make
+	make install
+
+2.安装bison
+	下载地址：http://www.gnu.org/software/bison/
+	tar zxf bison-2.5.tar.gz
+	cd bison-2.5
+	./configure
+	make(本人这里出错了，需要安装m4，)
+	make install
+安装m4
+	sudo yum install m4
+	或者
+	ftp://ftp.gnu.org/gnu/m4/
+	下载地址：ftp://ftp.gnu.org/gnu/m4-1.4.16.tar.gz
+	tar zxvf m4-1.4.16.tar.gz  
+	cd m4-1.4.16
+	./configure
+	make
+	make install
+
+3.安装gcc-c++（系统自带，跳过..）
+	下载地址：http://www.gnu.org/software/gcc/  
+	或
+	http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/
+	wget  http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-4.9.3/gcc-4.9.3.tar.gz
+	tar zxvf gcc-c++-4.4.4.tar.gz  
+	cd gcc-c++-4.4.4  
+	./configure  
+	make  
+	make install
+	
+	或者	
+	sudo yum install gcc
+	
+4.安装cmake
+	ubuntu安装： $sudo apt-get install cmake
+  1 运行cmake检查有没有cmake命令，如果没有需要先安装cmake
+    mysql@ubuntu:~$ cmake
+    The program 'cmake' is currently not installed. ...
+  2 下载cmake：
+    http://www.cmake.org/cmake/resources/software.html
+    这里下载的是源码 cmake-2.8.7.tar.gz
+    mysql@ubuntu:~/soft$ wget http://www.cmake.org/files/v2.8/cmake-2.8.7.tar.gz
+	>tar xzf cmake-2.8.3.tar.gz
+	>cd cmake-2.8.3
+	>./bootstrap
+	>make
+	>make install
+
+5.安装libncurses5-dev（Redhat and derivates 叫做 ncurses-devel,参见下条）
+	ubuntu：apt-get install libncurses5 libncurses5-dev（本人之前采用apt已安装）
+	redhat: yum install ncurses-devel
+	centos：yum -y install ncurses-devel
+
+6.安装ncurses（本人ubuntu，跳过...）
+	下载地址：http://www.gnu.org/software/ncurses/
+	tar zxvf ncurses-5.8.tar.gz  
+	cd ncurses-5.8  
+	./configure  
+	make  
+	make install
+
+7 安装mysql
+一、 先创建专用账户mysql
+    root>groupadd mysql
+	root>useradd -r -g mysql mysql
+二、 准备安装目录，目录授权等
+	root>mkdir -p /usr/local/mysql
+	root>chown -R mysql:mysql /usr/local/mysql
+三、 准备数据目录，目录授权等
+	root>mkdir -p /data/mysql
+	root>chown -R mysql:mysql /data/mysql
+
+四、 下载mysql：
+	wget http://downloads.mysql.com/archives/mysql-5.5/mysql-5.5.24.tar.gz
+	
+五、编译安装
+	root>tar zxf mysql-5.5.15.tar.gz
+	root>cd mysql-5.5.15
+	#root>cmake . -LH|more                         //CMake下查看MySQL的编译配置
+	root>cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql  -DMYSQL_DATADIR=/data/mysql  -DEXTRA_CHARSETS=all -DMYSQL_USER=mysql
+	#root>cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/home/mysql -DSYSCONFDIR=/etc -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_BLACKHOLE_STORAGE_ENGINE=1 -DWITH_FEDERATED_STORAGE_ENGINE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DMYSQL_UNIX_ADDR=/tmp/mysqld.sock -DENABLED_LOCAL_INFILE=1 -DEXTRA_CHARSETS=all -DMYSQL_USER=mysql
+	root>make  
+	root>make install
+
+修改权限
+	root>chown -R mysql.mysql /usr/local/mysql  
+	root>chown -R mysql.mysql /data/mysql
+	
+六、复制配置文件
+	root>cp support-files/my-medium.cnf /etc/my.cnf
+	root>cp support-files/mysql.server /etc/init.d/mydqld
+	root>chmod 755 /etc/init.d/mydqld
+
+	初始化数据库
+	root>/usr/local/mysql5515/scripts/mysql_install_db --basedir=/usr/local/mysql/ --datadir=/home/mysql/data  --user=mysql
+ 
+七、启动、停止、重启mysql服务
+	root>/etc/init.d/mysqld start  
+	root>/etc/init.d/mysqld stop  
+	root>/etc/init.d/mysqld restart
+	
+	service mysqld start
+	
+	查看服务ps -ef|grep mysql
+	
+	或
+	root>/usr/local/mysql/bin/mysqld_safe --user=mysql &             后台运行
+	
+八、客户端测试
+	# bin/mysqladmin version
+	# bin/mysqladmin variables
+	
+九、修改root密码
+	root>myql -u root -p[回车]
+	mysql>use mysql;
+	mysql>update user set password=PASSWORD("mysql") where user='root';
+	mysql>FLUSH PRIVILEGES;
+
+
+设置开机启动
+	root>cp support-files/mysql.server /etc/init.d/mysql.server
+	root>cp support-files/mysql.server /etc/init.d/mysqld
+	root>chmod 777 /etc/init.d/mysqld
+	root>chkconfig -add mysqld
+	#chkconfig --level 3 mysqld on
+	root>chmod 777 /avr/log
+	root>vi /etc/my.cnf
+	
+
+到这里就完成了,现在重启电脑进入终端测试
+# cd /usr/local/mysql
+# bin/mysqlshow
+如果可以看到数据说明mysql已经自启动了,现在你可以在终端使用
+service mysqld stop来停止mysql服务
+使用service mysqld start 来启动mysql服务
+
+ 
+
+参考：
+http://blog.csdn.net/westmaniac/article/details/6535000
+http://www.fxzc.net/archives/yuanmaanzhuangmysql5-5banbenquangonglue.html
+http://www.banping.com/2011/01/20/install-mysql5-5-handler-socket/
+http://tersky.blog.51cto.com/403285/473628
+http://www.cnblogs.com/zhangdsh/archive/2011/07/04/2097653.html
+http://space.itpub.net/7607759/viewspace-695654
+      http://blog.csdn.net/xqandpan/article/details/6118443
+      http://www.orczhou.com/index.php/2010/06/compile-mysql-from-source/
+
+
+=========================================
+useradd mysql  
+tar zxf mysql-5.5.15.tar.g  
+cd mysql-5.5.15  
+CFLAGS="-O3" CXX=gcc CXXFLAGS="-O3 -felide-constructors -fno-exceptions -fno-rtti" 
+cmake . -LH|more //CMake下查看MySQL的编译配置  
+cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DEXTRA_CHARSETS=all
+make  
+make install  
+chown -R mysql:mysql /usr/local/mysql
+cp support-files/my-medium.cnf /etc/my.cnf
+cd /usr/local/mysql/
+./scripts/mysql_install_db --user=mysql
+./scripts/mysql_install_db --basedir=/usr/local/mysql/ --user=mysql &
+#/usr/local/mysql/bin/mysqld_safe --user=mysql &
+/usr/local/mysql/bin/mysql
+Welcome to the MySQL monitor.  Commands end with ; or \g.  
+Your MySQL connection id is 2  
+Server version: 5.5.14-log Source distribution  
+ 
+Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.  
+ 
+Oracle is a registered trademark of Oracle Corporation and/or its  
+affiliates. Other names may be trademarks of their respective  
+owners.  
+ 
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.  
+ 
+mysql> show databases;  
++--------------------+  
+| Database           |  
++--------------------+  
+| information_schema |  
+| mysql              |  
+| performance_schema |  
+| test               |  
++--------------------+  
+4 rows in set (0.01 sec  
+ 
+
+
+ubuntu安装mysql
+sudo apt-get install mysql-server 
+$mysql -u root
+mysql> GRANT ALL PRIVILEGES ON *.* TO root@localhost IDENTIFIED BY "123456"; 
+mysql>CREATE DATABASE xoops；
+mysql>GRANT ALL PRIVILEGES ON xoops.* TO xoops_root@localhost IDENTIFIED BY "654321"; 
+
+密码root1011
+
+
+
+
+要安装 MySQL，可以在终端提示符后运行下列命令：
+sudo apt-get install mysql-server
+过程中会其实输入root用户密码:root1011
+一旦安装完成，MySQL 服务器应该自动启动。您可以在终端提示符后运行以下命令来检查 MySQL 服务器是否正在运行：
+
+sudo netstat -tap | grep mysql
+
+当您运行该命令时，您可以看到类似下面的行：
+tcp 0 0 localhost.localdomain:mysql *:* LISTEN -
+
+如果服务器不能正常运行，您可以通过下列命令启动它：
+sudo /etc/init.d/mysql restart
+
+配置 MySQL 的管理员密码
+sudo mysqladmin -u root password root123
+ 
+mysql-admin包，选择安装后就可以，在应用程序／编程就可以运行。
+

@@ -1,0 +1,649 @@
+http://www.we168.cn/?xmls=web/kecjieshao.html&parentid=148
+课程设置
+第一部分：MySQL入门者课程 
+第二部分：数据库开发技术 
+第三部分：数据库管理和备份恢复 
+第四部分：数据库性能优化和性能测试 
+第五部分：数据库高可用与监控实施 
+
+课程目标
+◆熟悉 MySQL数据库系统的安装、配置、管理 
+◆掌握 MySQL数据库开发的技术 
+◆掌握 MySQL备份恢复和性能优化技术 
+◆懂的根据系统特点制订MySQL 数据库高可用方案 
+◆能够建立 MySQL数据库监控体系 
+☆完成学习后，学员将具有单独维护20w在线的网络游戏数据库能力，或者注册用
+户达到上百万的SNS社区的能力。 
+
+■课程大纲：
+
+目录： 课程一：MySQL For Begineer  
+       课程二：MySQL 5.0 for Database Administrator  
+       课程三：MySQL 5.0 For Developers  
+       课程四：MySQL Cluster for HA  
+       课程五：MySQL 5.0 Performance Tuning  
+       课程六：MySQL High Availbility  
+       课程七：MySQL高级存储过程  
+       课程八：MySQL and PHP：开发动态网页应用 
+
+Database 基础
+    SQL 语言和MySQL
+    Database 设计
+    Database建模
+    键
+    Normalization
+    Data 类型
+    What is NULL?
+    Database 结构概览Structure
+
+Database 创建
+    创建新的Database 架构
+    创建 Database
+    创建表
+
+基本查询
+    SELECT 命令
+    MySQL Query Browser
+    排错
+
+Database 维护
+    删除整个Database
+    维护表
+    维护列
+    索引和约束
+    Data 控制 
+
+删除、修改表列数据
+    INSERT命令
+    REPLACE 命令
+    UPDATE 命令
+    DELETE 命令
+
+函数
+    简单函数
+    Grouping With Functions
+
+Joining Tables
+    复用多个表
+    Inner Joins
+    Outer Joins
+
+导出导入数据
+    导出数据
+    导入数据
+
+Sub queries
+    Sub query概念
+    Sub queries分类
+    Sub query 类型
+    Sub queries 处理
+    其他Sub query 使用
+
+Supplementary Information
+    创建视图
+    事务
+    存储引擎
+    解析元数据
+
+
+课程二：MySQL 5.0 for Database Administrator
+
+课程内容：
+MySQL 架构
+    Client/Server架构
+    MySQL 架构概览
+    磁盘空间使用
+    内存使用插件接口
+
+The MySQL Server
+    MySQL Distributions
+    在Windows系统上启动停止 MySQL
+    在Linux系统上启动停止MySQL
+    升级 MySQL
+    管理多个服务器
+
+配置 MySQL Server
+    MySQL 配置
+    动态服务变量
+    SQL 模式
+    日志和状态文件
+    二进制日志
+
+MySQL 客户端
+    管理客户端概览
+    调用MySQL 客户端程序
+    使用mysql C客户端
+    mysqladmin 客户端
+    MySQL Connectors
+    第三方APIs
+
+数据类型概览
+    数据类型
+    数字
+    字符串
+    二进制数据
+    时间数据
+    NULLs
+    列属性
+
+元数据
+    元数据访问模式
+    INFORMATION_SCHEMA  数据库/模式
+    使用SHOW 和 DESCRIBE命令
+    Mysqlshow 命令
+
+存储引擎
+    存储引擎概览
+    MyISAM, InnoDB,和 MEMORY 存储引擎
+    其它存储引擎
+    选择合适的存储引擎
+    使用多个存储引擎
+    存储引擎比较图
+
+分区
+    分区概览和使用分区的原因
+    创建分区表
+    获得分区信息
+    修改和移除分区
+    分区修改对性能的影响
+    分区修剪
+    存储引擎分区信息
+    分区、锁及其限制
+
+事务和锁
+    事务
+    事务控制语句
+    隔离级别
+    锁
+
+安全和用户管理
+    安全及其风险
+    安全衡量
+    权限
+    访问级别，包含1 – 用户账号, 2 – 数据库, 3 – 表, 4 – 列, 5 – 存储程序
+    用户账号维护
+    客户端访问控制
+    使用安全连接
+
+表维护
+    表维护
+    用于维护操作的SQL 语句
+    用于表维护的客户端和工具
+    按存储引擎分类的表维护
+
+导出导入数据
+    导出和导入数据
+    使用SQL 导出导入数据
+    使用SQL 脚本导出导入数据
+
+MySQL 编程
+    定义、执行和检查存储程序
+    存储程序和执行安全
+    定义、创建和删除触发器
+    触发器限制及权限
+    定义事件
+    调度事件
+    DBA's 使用MySQL 编程
+    备份存储程序
+
+视图
+    视图定义
+    创建Views
+    更新 Views
+    管理 Views
+
+备份和恢复
+    规划备份和恢复
+    备份工具概览
+    创建裸备份
+    创建逻辑（文本）备份
+    备份日志和状态文件
+    复制及备份的目的
+    备份方式比较
+    数据恢复
+
+性能调优介绍
+    使用 EXPLAIN 来分析查询
+    通用表优化
+    设定和解释MySQL Server 变量
+
+高可用性介绍
+    MySQL Replication
+
+课程三：MySQL 5.0 For Developers
+MySQL Client/Server 概念
+    MySQL 通用架构
+    磁盘空间使用
+    内存使用
+
+MySQL 客户端
+    调用客户端程序
+    使用选项文件
+    mysql 客户端
+    MySQL Query Browser
+    MySQL 连接器
+    第三方APIs
+
+表数据查询
+    SELECT 语句
+    查询结果汇总
+    使用 UNION
+
+控制错误和警告
+    SQL 模式
+    控制丢失的或者非法数据值
+    解释错误信息
+
+SQL 表达式
+    SQL 比较
+    SQL 表达式中的函数
+    SQL语句中的注释
+
+数据类型
+    数据类型概览
+    数字
+    字符串
+    二进制数据
+    时间数据
+    NULLs
+
+元数据
+    元数据访问模式
+    INFORMATION_SCHEMA  数据库/模式
+    使用SHOW 和 DESCRIBE命令
+    Mysqlshow 命令
+
+Databases
+    Database 属性
+    最佳设计实践
+    Identifiers
+    创建 Databases
+    修改 Databases
+    移除 Databases
+
+表
+    创建表
+    表属性
+    列选项
+    基于已经存在的表创建新表
+    修改表
+    移除表
+    外部键值
+
+处理表数据
+    INSERT 语句
+    DELETE 语句
+    UPDATE 语句
+    REPLACE 语句
+    在双键值更新时插入
+    TRUNCATE TABLE 语句
+
+事务
+    Transaction定义
+    Transaction 命令
+    隔离级别
+    锁
+
+Joins
+    Join定义
+    在SQL中Joining 表
+    基本Join 语法
+    Inner Joins
+    Outer Joins
+    其他类型Joins
+    在UPDATE and DELETE 语句中joins的用法
+
+Subqueries
+    Subqueries类型
+    表 Subquery 操作
+    关联及非关联Subqueries
+    转换Subqueries 到 Joins
+
+视图
+    视图定义
+    创建Views
+    更新 Views
+    管理 Views
+    获取视图元数据
+
+Prepared 语句
+    为何使用 Prepared 语句?
+    通过mysql 客户端使用 Prepared 语句
+    Preparing  语句
+    执行 Prepared 语句
+    释放一个 Prepared 语句
+
+导出和导入数据
+    导出和导入数据
+    使用SQL 导出和导入数据
+    使用mysql客户端程序导出和导入数据
+    使用SOURCE命令导入数据
+
+存储程序
+    定义存储程序
+    创建、执行和删除存储程序
+    复合语句
+    分配变量
+    参数申明
+    流程控制语句
+    申明和使用Handlers
+    游标
+
+触发器
+    触发器定义
+    删除触发器
+    触发器限制
+
+存储引擎
+    SQL 分析器和存储引擎Tiers
+    存储引擎和MySQL
+    MyISAM 存储引擎
+     InnoDB 存储引擎
+    MEMORY 存储引擎
+    其它存储引擎
+
+优化
+    优化概念及概览
+    使用索引进行优化
+    使用EXPLAIN来分析查询
+    查询重写技术
+    通过先知书出来优化查询
+    使用汇总表
+    优化更新
+    选择合适的存储引擎
+
+课程四：MySQL Cluster for HA
+MySQL 群机管理
+    群集管理控制台
+    备份群集数据
+    恢复备份
+    对备份排错
+    修改表定义
+
+MySQL 群集安全
+    群集安全最佳实践
+    安全架构
+
+MySQL 群集性能
+    性能相关术语
+    查询执行
+    数据 大小及使用问题
+    查询设计
+    配置选项
+
+解决MySQL 群集问题
+    诊断的最佳实践
+    连接问题
+    仲裁关闭
+    资源问题
+    如何获得帮助
+
+MySQL 群集复制
+    群集复制
+    群集准备
+    单复制通道
+    冗余复制通道
+    为备份使用MySQL群集复制
+
+课程五：MySQL 5.0 Performance Tuning
+MySQL 架构
+    MySQL 架构概览（高级别）
+    Client/Server 架构
+    存储引擎概念
+    数据字典
+    数据存储
+    锁
+
+MySQL 性能管理工具
+    概览
+    Benchmarking 工具
+    管理工具
+    使用SHOW 命令
+
+模式设计
+    数据建模
+    规整化
+    去规整化
+    数据类型
+    分区
+
+索引
+    索引
+    MySQL 索引类型
+    索引优化
+
+语句优化
+    通用SQL优化
+    EXPLAIN
+    MySQL 优化器
+    发现有嫌疑的查询
+    缓存和 MySQL
+    选择一个架构
+
+缓存
+    缓存的益处
+    Non-MySQL 缓存
+    查询缓存
+    MEMORY/MyISAM 表作为缓存使用
+
+MySQL 服务器配置
+    服务器连接参数
+    表缓存和多线程问题
+    独立的线程参数
+    通用监测
+    表控制器
+
+MyISAM
+    使用环境
+    裸存储格式
+    索引
+    锁
+    键缓存
+    MyISAM 调优
+    其他优化工具
+    合并存储引擎
+
+InnoDB
+    事务
+    内部缓存
+    索引
+    崩溃恢复
+    最佳实践
+    调优
+    比较InnoDB 和 MyISAM
+
+修改存储引擎
+    MEMORY, FEDERATED, ARCHIVE, CSV, BLACKHOLE, Falcon
+    多个存储引擎的性能问题
+    创建一个客户化的存储引擎
+    MySQL群集
+
+课程六：MySQL High Availbility
+简单介绍
+    MySQL 概览
+    MySQL 产品和服务
+    社区 Vs. 企业
+    支持的操作系统版本
+
+MySQL 认证计划和培训课程路径
+    MySQL 网页
+    安装 MySQL
+    安装 world database
+
+介绍MySQL 高可用性
+    HA概念
+    术语概览
+    第三方软件
+    心跳
+
+MySQL Replication
+    基本架构
+    二进制的日志
+    Replication 线程和文件
+    设置 MySQL Replication
+    监测 MySQL Replication
+    MySQL Replication优劣性
+    高级 Replication 技术
+    Replication 优化
+
+MySQL Cluster
+    架构
+    设置MySQL Cluster
+    管理 Cluster
+    Cluster 异步 Replication
+    Cluster 的正反两面性
+
+共享磁盘 Clustering
+    共享磁盘Clustering
+    设置 Active-Passive
+    Active-Active Clustering
+    用法示例
+
+Other Clustering
+    Continuent Uni/Cluster产品架构
+    分布式的复制块设备(DRBD)
+    DRDB 和 心跳
+    其他 DRBD 益处
+    额外资源
+
+系统维护的影响
+    简介
+    备份
+    表重组
+    模式修改
+    索引优化
+    总结
+
+HA 总结
+    可用工具概览
+    混合使用
+
+课程七：MySQL高级存储过程
+MySQL 存储过程基础
+    复合语句
+    设置变量
+    参数申明
+    操作符和内置函数
+    获得存储程序的相关信息
+    修改和删除存储程序
+    备份和恢复存储程序
+    存储程序的二进制日志
+
+SQL and MySQL 存储过程
+    流程控制语句
+    存储程序中的SQL语句
+    动态 SQL
+
+控制 Exceptions and Errors
+    Error 控制能力和限制
+    运行 Error 控制器
+    其他控制器问题
+    Error 控制器的限制
+
+管理触发器
+    创建触发器
+    获取触发器的相关信息
+    删除触发器
+    触发器的限制
+
+数据安全
+    设置权限
+    选择视图还是存储过程？
+    调用权限错误
+    防止代码植入
+
+最佳实践
+    编程基础
+    代码风格
+    变量使用流程控制
+    动态SQL
+
+课程八：MySQL and PHP：开发动态网页应用
+安装校验
+    LAMP 架构
+    安装、校验Apache
+    安装、校验MySQL
+    安装、校验PHP
+    集成环境
+
+PHP 基础
+    在HTML中划分出 PHP 代码
+    注释 PHP 代码
+    构建PHP 和终端用户的交互
+    PHP数据类型
+    系统键控
+    用户定义函数
+
+MySQL 基础
+    通用架构
+    SQL 分析器和存储引擎
+    MySQL 客户端
+    MySQL Query Browser
+
+Manage Databases
+    Database 属性
+    Database 设计
+    MySQL Identifiers
+    创建 Databases
+    修改 Databases
+    终止 Databases
+
+Manage Tables
+    表属性
+    MySQL 数据类型
+    创建表
+    修改表
+    清空表
+    移除表
+    索引
+    外部键值
+
+SQL SELECT 命令
+    SELECT 语句
+    汇总查询结果
+
+SQL 表达式
+    SQL 表达式
+    SQL 表达式中的函数应用
+
+SQL DML命令
+    INSERT 语句
+    DELETE 语句
+    UPDATE 语句
+    REPLACE 语句
+
+SQL Joins
+    定义 Join
+    Inner Joins
+    Outer Joins
+    使用Qualifiers and Aliases
+    多表UPDATE and DELETE 语句
+
+MySQL Database 驱动的基于网页的表单
+    MySQL连接
+    数据抓取
+    数据插入
+    更新已有数据
+    数据删除
+    MySQL元数据
+    MySQL错误信息
+
+Session 控制
+    定义Session 控制
+    Session 控制任务
+    PHP 和MySQL混用时的会话控制
+
+基于对象编程
+    基于对象编程的优势
+    使用对象
+    Exception 控制
+
+认证
+    HTTP 认证
+    PHP 认证
+
+对PHP 和 MySQL进行加密
+    PHP 配置参数
+    数据加密
+    加密MySQL Server
+    权限

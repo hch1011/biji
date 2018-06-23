@@ -1,0 +1,61 @@
+http://lei3056.blog.163.com/blog/static/395322792012723423822/
+启动
+/bin/mysqladmin -u mysql shutdown
+/bin/safe_mysqld &
+
+安装服务
+cp /usr/local/mysql/share/mysql/mysql.server  /etc/init.d/mysql
+service mysql start
+service mysql stop
+
+
+
+
+查看运行的语句
+SHOW PROCESSLIST 
+SELECT * FROM information_schema.processlist
+
+SHOW STATUS LIKE "Handler_read%"; 
+
+
+查询计划
+EXPLAIN SELECT * FROM document_file_info WHERE id="123";
+
+添加用户
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION;
+
+GRANT ALL PRIVILEGES ON *.* TO 'mysql'@'localhost' IDENTIFIED BY 'admin' WITH GRANT OPTION;
+
+查询日志文件
+show variables like 'log_%';
+
+查看二进制日志文件列表
+mysql> show master logs;
+
+看二进制日志文件用mysqlbinlog
+shell>mysqlbinlog mail-bin.000001
+或者shell>mysqlbinlog mail-bin.000001 | tail
+
+my.cnf中配置日志
+log-error=/usr/local/mysql/log/error.log
+long_query_time=2
+log-slow-queries= /usr/local/mysql/log/slowquery.log
+log=/usr/local/mysql/log/mysql.log
+log-output=FILE
+
+开启慢查询
+long_query_time =2 --是指执行超过多久的sql会被log下来，这里是2秒
+log-slow-queries= /usr/local/mysql/log/slowquery.log --将查询返回较慢的语句进行记录
+log-queries-not-using-indexes = nouseindex.log --就是字面意思，log下来没有使用索引的query
+log=mylog.log --对所有执行语句进行记录
+log-output=FILE --开启查询日志开关
+命令行开启普通日志
+mysql>set global log_output=file; --设置输出为文件（或table输出到表mysql.general_log）
+mysql>set global general_log_file='/usr/local/mysql/log/mysql.log';
+mysql>set global general_log=on;
+http://blog.sina.com.cn/s/blog_6b3861870100ogd3.html
+
+
+清理日志
+mysql >flush logs
+mysql >reset master

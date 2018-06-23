@@ -1,0 +1,33 @@
+1 命令行查看mysql配置，包括数据库目录
+获取安装目录和数据目录
+mysql>show variables like '%basedir%'
+mysql>show variables like '%datadir%';
+
+[root@test212 mysql]# mysqladmin variables -p
+
+mysql>show variables; 
+
+2 查看cat /etc/my.cnf
+
+
+
+目录介绍;
+MyISAM存储引擎，数据库文件类型就包括.frm、.MYD、.MYI
+InnoDB存储引擎，数据库文件类型就包括.frm、ibdata1、.ibd(ibdata1、.ibd文件默认存放位置是MySQL安装目录下的data文件夹)
+
+.frm文件：存储数据表的框架结构，文件名与表名相同，每个表对应一个同名frm文件，不管使用何种存储引擎，都有这个文件。
+.MYD文件：即MY Data，表数据文件
+.MYI文件：即MY Index，索引文件
+.log文件：日志文件
+
+InnoDB采用表空间（tablespace）来管理、存储表数据和索引，
+ibdata1,ibdata2...:InnoDB数据库文件（即InnoDB文件集，ib-file set）,一般存在在mysql的数据目录下，如：ibdata1、ibdata2等系统表空间文件，存储InnoDB系统信息和用户数据库表数据和索引，所有表共用.ibd文件：单表表空间文件，每个表使用一个表空间文件（file per table），存放用户数据库表数据和索引。
+
+
+ib_logfile1、ib_logfile2 :日志文件： 
+
+
+
+
+
+

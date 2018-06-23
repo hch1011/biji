@@ -1,0 +1,30 @@
+1 常用存储引擎MyISAM和InnoDB
+主要区别：
+MyISAM是非事务安全型的，InnoDB是事务安全型的。
+MyISAM锁的粒度是表级，  InnoDB支持行级锁定。
+MyISAM支持全文类型索引，InnoDB不支持全文索引。
+MyISAM简单，效率优于InnoDB，适合小应用。
+MyISAM表是保存成文件的形式，数据转移简单。
+InnoDB表比MyISAM表更安全
+
+
+MyISAM管理非事务表。它提供高速存储和检索，以及全文搜索能力。如果应用中需要执行大量的SELECT查询，那么MyISAM是更好的选择。
+
+InnoDB用于事务处理应用程序，具有众多特性，包括ACID事务支持。如果应用中需要执行大量的INSERT或UPDATE操作，则应该使用InnoDB，这样可以提高多用户并发操作的性能。
+
+常用命令：
+
+1.看表的存储类型（三种）：
+show create table tablename  
+show table status from  dbname  where name=tablename 
+mysqlshow  -u user -p password --status dbname tablename  
+ 
+2.修改表的存储引擎：
+alter table tablename type=InnoDB 
+
+3.启动mysql数据库的命令行中添加以下参数使新发布的表都默认使用事务：
+default-table-type=InnoDB 
+
+4.临时改变默认表类型：
+set table_type=InnoDB 
+show variables like 'table_type' 

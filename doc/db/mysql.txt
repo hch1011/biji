@@ -1,0 +1,91 @@
+MySQL的四种不同查询的分析
+http://database.51cto.com/art/201202/320647.htm
+
+
+
+MySql5.5.8 源代码编译安装 ：http://blog.csdn.net/xqandpan/article/details/6118443
+Linux下MySql多实例免安装部署：http://blog.csdn.net/xqandpan/article/details/5698760
+
+从文件向mysql导数据：
+LOAD DATA INFILE "/tmp/usercre01.txt" INTO TABLE USER_ACCOUNT_MIRROR fields terminated by ',' lines terminated by '\n';
+show master status;
+
+修改表名
+alter table USER_ACCOUNT_MIRROR_NEW rename to USER_ACCOUNT_MIRROR;
+创建用户
+重置mysql中root帐号的密码
+http://www.jacklog.com/vps/406.html
+
+2赋权限
+GRANT ALL PRIVILEGES ON *.* TO notify
+grant all privileges on ABC.* to 'efg'@'%' identified by 'efg';
+
+mysql -h 192.168.50.189 -u cheng.huang -p Bsy9YcYb
+
+
+mysql主主备份：
+Mysql采用Master-Master主主复制方案
+主要实现目标数据库负载分流，达到高并发时缓解对于数据库压力，具体安装请参考如下：
+二台Mysql服务器，他们的IP地址分别为：
+A：192.168.0.20
+B：192.168.0.21
+数据库都是 test_3306
+首先我给两台服务器的my.ini 贴出来
+A：my.ini
+
+server-id=2
+master-host=192.168.0.20
+master-user=mydb
+master-password=123
+master-port=3306
+replicate-do-db=tbqu
+log-bin=
+log-slave-updates
+binlog-ignore-db=mysql
+slave-skip-errors=all
+
+B:my.ini
+
+server-id=1
+master-host=192.168.0.21
+master-user=mydb
+master-password=123
+master-port=3306
+replicate-do-db=tbqu
+log-bin=
+log-slave-updates
+binlog-ignore-db=mysql
+slave-skip-errors=all
+
+多主互备和主从复制有一些区别，因为多主中 都可以对服务器有写权限，所以设计到自增长重复问题
+
+出现的问题（多主自增长ID重复）
+1:首先我们通过A,B的test表结构
+2:掉A，在B上对数据表test(存在自增长ID)执行插入操作，返回插入ID为1
+3:后停掉B，在A上对数据表test(存在自增长ID)执行插入操作，返回的插入ID也是1
+4:然后 我们同时启动A,B，就会出现主键ID重复
+
+解决方法：
+我们只要保证两台服务器上插入的自增长数据不同就可以了
+如：A查奇数ID，B插偶数ID，当然如果服务器多的话，你可以定义算法，只要不同就可以了
+
+在这里我们在A,B上加入参数，以实现奇偶插入
+
+A：my.ini上加入参数
+
+auto_increment_offset = 1
+auto_increment_increment = 2
+这样A的auto_increment字段产生的数值是：1, 3, 5, 7, …等奇数ID了
+
+B：my.ini上加入参数
+
+auto_increment_offset = 2
+auto_increment_increment = 2
+这样B的auto_increment字段产生的数值是：2, 4, 6, 8, …等偶数ID了
+
+可以看出，你的auto_increment字段在不同的服务器之间绝对不会重复，所以Master-Master结构就没有任何问题了。当然，你还可以使用3台，4台，或者N台服务器，只要保证auto_increment_increment = N 再设置一下auto_increment_offset为适当的初始值就可以了，那样，我们的MySQL可以同时有几十台主服务器，而不会出现自增长ID 重复。
+
+在这里我们说的是2台MYSQL服务器，你也可以扩展到多台，实现方法类似
+A > B -> C> D ->A，这里时间关系先不讲多个中master-master复制。
+
+ 

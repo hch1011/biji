@@ -1,0 +1,81 @@
+1 编译安装-----------------------------------------------------
+http://www.linuxidc.com/Linux/2013-05/84735.htm
+
+yum -y install ncurses* libtermcap*
+
+
+shell> groupadd mysql
+shell> useradd -g mysql mysql
+shell> tar -zxf mysql-VERSION.tar.gz
+shell> cd mysql-VERSION
+shell> ./configure --prefix=/usr/local/mysql --with-charset=utf8 --with-plugins=innobase
+shell> make
+shell> make install
+shell> cp support-files/my-medium.cnf /etc/my.cnf
+shell> cd /usr/local/mysql
+shell> chown -R mysql:mysql /usr/local/mysql 
+
+shell> bin/mysql_install_db --user=mysql           //初始化mysql
+#shell> bin/mysqld_safe --user=mysql &
+-----------------------------------------------------
+编辑/etc/my.cnf
+[mysqld]
+datadir=/data/mysql/data
+
+[mysqld_safe]
+default-character-set=utf8
+default-srotage-engine=INNODB
+
+
+安装服务
+shell> cp /usr/local/mysql/share/mysql/mysql.server  /etc/init.d/mysql
+shell> service mysql start
+shell> service mysql stop
+
+#/usr/local/mysql/bin/mysqladmin -u root password 123456
+#/usr/local/mysql/bin/mysqladmin -u root -h AY1212030916422919746 password hhxxttxs
+添加用户
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION;
+
+2 yum安装-----------------------------------------------------
+*安装mysql客户端
+ yum install mysql
+*安装mysql 服务器端：
+ yum install mysql-server mysql-devel
+ yum install mysql-devel
+*数据库字符集设置
+
+安装过后需要启动mysql服务，我们可以通过一下两总方法：
+1、service mysqld start
+2、/etc/init.d/mysqld start
+启动过后需要给mysql创建一个root管理员：
+# mysqladmin -u root password admin
+
+
+卸载
+#yum remove mysql mysql-devel mysql-server
+
+
+
+
+
+
+
+
+
+
+
+
+
+innodb 安装 ========================
+mysql安装innodb插件：http://www.2cto.com/database/201109/103279.html
+show engines;
+show plugins;
+show variables like "have_%";   #查看一下，mysql配置是不是支持动态添加插件
+mysql> INSTALL PLUGIN INNODB SONAME 'ha_innodb.so';   #添加插件
+
+
+
+
+参考
+http://zhidao.baidu.com/question/336371762.html

@@ -1,0 +1,25 @@
+linux下使用yum安装mysql
+
+1. 安装mysql 服务器端：
+
+          yum install mysql-server
+ 
+          yum install mysql-devel
+2. 安装mysql客户端：
+          yum install mysql
+3. 启动mysql服务：
+          service mysqld start或者/etc/init.d/mysqld start
+停止：
+          service mysqld stop
+重启：
+          service mysqld restart
+4. 创建root管理员：
+          mysqladmin -u root password 123456
+5.登陆
+mysql -uroot -p123456
+
+
+
+
+=======================
+ yum install lrzsz
